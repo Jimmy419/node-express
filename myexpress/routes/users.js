@@ -3,8 +3,13 @@ var router = express.Router();
 var userModel = require("../models/UserModel");
 
 /* GET users listing. */
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+router.all('/login', function(req, res) {
+  subflag = req.body['subflag'];
+  if(subflag == undefined){
+  	res.render('login');
+  }else{
+  	userModel.login(req,res);
+  }
 });
 
 router.post('/zhuce',function(req,res){
